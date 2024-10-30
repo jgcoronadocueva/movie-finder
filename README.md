@@ -1,1 +1,1 @@
-# wdd330_finalproject
+# movie-finder
