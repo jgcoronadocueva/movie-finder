@@ -167,3 +167,50 @@ function fetchAndDisplayCurrentPage() {
             showError("Failed to fetch movies for the current page.");
         });
 }
+
+async function fetchSimilarMovies(movieId, apiKey) {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${apiKey}`);
+    if (!response.ok) {
+        throw new Error("Failed to fetch similar movies");
+    }
+    return response.json();
+}
+
+async function showMovieDetails(movie) {
+    const detailSection = document.getElementById("movie-details");
+    detailSection.innerHTML = `
+        <h2>${movie.title} (${movie.release_date ? movie.release_date.split('-')[0] : 'Unknown'})</h2>
+        <p><strong>Overview:</strong> ${movie.overview}</p>
+        <p><strong>Release Date:</strong> ${movie.release_date}</p>
+        <p><strong>Genres:</strong> ${movie.genres.map(genre => genre.name).join(', ')}</p>
+        <p><strong>Rating:</strong> ${movie.vote_average ? movie.vote_average.toFixed(2) : 'N/A'}</p>
+        <h3>Similar Movies:</h3>
+        <div id="similar-movies"></div>
+        <button id="close-details">Close</button>
+    `;
+    detailSection.style.display = "block"; // Show the details section
+
+    // Fetch and display similar movies
+    try {
+        const similarMovies = await fetchSimilarMovies(movie.id, apiKey);
+        displaySimilarMovies(similarMovies.results);
+    } catch (error) {
+        console.error(error);
+        detailSection.innerHTML += `<p>Could not load similar movies.</p>`;
+    }
+
+    // Add an event listener to close the details
+    document.getElementById("close-details").addEventListener("click", () => {
+        detailSection.style.display = "none"; // Hide the details section
+    });
+}
+
+function displaySimilarMovies(movies) {
+    const similarMoviesContainer = document.getElementById("similar-movies");
+    similarMoviesContainer.innerHTML = ""; // Clear previous similar movies
+
+    movies.forEach(movie => {
+        const similarMovieCard = createMovieCard(movie); // Reuse createMovieCard for similar movies
+        similarMoviesContainer.appendChild(similarMovieCard);
+    });
+}

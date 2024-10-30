@@ -302,3 +302,81 @@ footer p {
     background-color: #0056b3;
     color: white;
 }
+
+/* General styles for the movie details section */
+#movie-details {
+    display: none;
+    /* Initially hidden */
+    position: fixed;
+    /* Fixed position on the screen */
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* Adjust for centering */
+    background-color: #fff;
+    /* White background */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow */
+    padding: 20px;
+    /* Padding inside the box */
+    max-width: 600px;
+    /* Maximum width */
+    width: 90%;
+    /* Responsive width */
+    z-index: 1000;
+    /* Ensure it's above other elements */
+}
+
+/* Styles for movie title */
+#movie-details h2 {
+    margin: 0;
+    /* Remove default margin */
+    font-size: 24px;
+    /* Font size for the title */
+    color: #333;
+    /* Dark color for contrast */
+}
+
+/* Styles for paragraphs */
+#movie-details p {
+    margin: 10px 0;
+    /* Spacing between paragraphs */
+    font-size: 16px;
+    /* Font size for readability */
+    line-height: 1.5;
+    /* Spacing between lines */
+    color: #555;
+    /* Slightly lighter color for text */
+}
+
+/* Styles for the close button */
+#close-details {
+    background-color: #007bff;
+    /* Primary color */
+    color: white;
+    /* Text color */
+    border: none;
+    /* Remove default border */
+    border-radius: 5px;
+    /* Rounded corners */
+    padding: 10px 15px;
+    /* Padding for the button */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 16px;
+    /* Font size */
+    margin-top: 15px;
+    /* Space above the button */
+    transition: background-color 0.3s;
+    /* Transition effect */
+}
+
+/* Button hover effect */
+#close-details:hover {
+    background-color: #0056b3;
+    /* Darker shade on hover */
+}
